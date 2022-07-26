@@ -3,18 +3,15 @@ package openShake.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import openShake.client.Sample;
-import openShake.client.Logger;
-
 class Data{
-	private List samples;
+	private List<Sample> samples;
 
 	Data(){
-		this.List = new ArrayList<Sample>();
+		this.samples = new ArrayList<Sample>();
 	}
 
 	protected void addSample(Sample sample){
 		this.samples.add(sample);
-		Logger.data(sample.toString);
+		Logger.data(sample.toString());
 	}
 }

@@ -3,23 +3,30 @@ package openShake.client;
 import com.fazecast.jSerialComm.SerialPortMessageListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.fazecast.jSerialComm.SerialPort;
-
-import openShake.client.Sample;
-import openShake.client.Data;
+import java.util.Date;
 
 public class Listener implements SerialPortMessageListener{
 	@Override
-	public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
+	public int getListeningEvents(){
+		return SerialPort.LISTENING_EVENT_DATA_RECEIVED;
+	}
 
 	@Override
-	public byte[] getMessageDelimiter() { return new byte[] { (byte)'\n' }; }
+	public byte[] getMessageDelimiter(){
+		return new byte[] { (byte)'\n' };
+	}
 
 	@Override
-	public boolean delimiterIndicatesEndOfMessage() { return true; }
+	public boolean delimiterIndicatesEndOfMessage(){
+		return true;
+	}
 
 	@Override
 	public void serialEvent(SerialPortEvent event){
 		byte[] delimitedMessage = event.getReceivedData();
-		System.out.println("Received the following delimited message: " + delimitedMessage);
+		Logger.debug("Received message: " + new String(delimitedMessage));
+		Main.data.addSample(new Sample(delimitedMessage, new Date() ));
+//		Main.data.addSample(null);
 	}
 }
+

@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import com.fazecast.jSerialComm.SerialPort;
 
+import openShake.client.Main;
 import openShake.client.Comm;
 import openShake.client.Listener;
 
@@ -19,9 +20,6 @@ public class Window{
 	final String refreshButtonText = "Refresh";
 
 	final String logTabText = "Samples";
-
-
-	Comm channel;
 
 	public Window(){
 		JFrame frame = new JFrame();
@@ -56,8 +54,9 @@ public class Window{
 		connectButton.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					channel = new Comm((SerialPort)serialPortSelector.getSelectedItem(), new Listener());
-					channel.begin();
+					System.out.println("BOOP");
+					Main.channel = new Comm((SerialPort)serialPortSelector.getSelectedItem(), new Listener());
+					Main.channel.begin();
 				}
 			}
 		);
