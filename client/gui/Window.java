@@ -54,7 +54,6 @@ public class Window{
 		connectButton.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					System.out.println("BOOP");
 					Main.channel = new Comm((SerialPort)serialPortSelector.getSelectedItem(), new Listener());
 					Main.channel.begin();
 				}

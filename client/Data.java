@@ -11,7 +11,11 @@ class Data{
 	}
 
 	protected void addSample(Sample sample){
-		this.samples.add(sample);
+		try{
+			this.samples.add(sample);
+		}catch(Exception e){
+			Logger.error("Error adding sample to List", e);
+		}
 		Logger.data(sample.toString());
 	}
 }

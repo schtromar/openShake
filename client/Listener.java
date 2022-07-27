@@ -25,8 +25,11 @@ public class Listener implements SerialPortMessageListener{
 	public void serialEvent(SerialPortEvent event){
 		byte[] delimitedMessage = event.getReceivedData();
 		Logger.debug("Received message: " + new String(delimitedMessage));
-		Main.data.addSample(new Sample(delimitedMessage, new Date() ));
-//		Main.data.addSample(null);
+		try{
+			Main.data.addSample(new Sample(delimitedMessage, new Date() ));
+		}catch(Exception e){
+			Logger.error("Error adding sample:", e);
+		}
 	}
 }
 
