@@ -26,7 +26,6 @@ class Graph extends Chart implements Updater{
 	private final boolean filterDuplicateDates = true;
 
 	private TimeSeries series;
-//	private double lastValue = 100.0;
 
 	private Date lastDate;
 
@@ -46,25 +45,6 @@ class Graph extends Chart implements Updater{
 		axis.setRange(0.0, 1000.0);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
-/*
-		JButton button = new JButton("Add New Data Item");
-		button.setActionCommand("ADD_DATA");
-		button.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					if(e.getActionCommand().equals("ADD_DATA")){
-						double factor = 0.90 + 0.2 * Math.random();
-						lastValue = lastValue * factor;
-						Millisecond now = new Millisecond();
-						series.add(new Millisecond(), lastValue);
-					}
-				}
-			}
-		);
-
-		this.add(button, BorderLayout.SOUTH);
-//		setContentPane(this);
-*/
 		this.add(chartPanel);
 
 	}
