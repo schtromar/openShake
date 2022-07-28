@@ -2,7 +2,7 @@ package openShake.client;
 
 import java.util.Date;
 
-class Sample{
+public class Sample{
 	private int value;
 	private Date date;
 

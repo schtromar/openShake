@@ -86,6 +86,12 @@ public class Window{
 		JPanel r = new JPanel();
 		r.setLayout(new BorderLayout());
 
+		JTextArea log = new JTextArea();
+		log.setEditable(false);
+		Main.data.addUpdater(new SampleListUpdater(log));
+		JScrollPane scrollPane = new JScrollPane(log);
+		r.add(scrollPane);
+
 		return r;
 	}
 
