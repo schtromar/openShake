@@ -18,7 +18,9 @@ class SampleListUpdater implements Updater{
 	}
 
 	public void addSample(Sample sample){
-		text.append(sample.toString() + "\n");
-		text.setCaretPosition(text.getDocument().getLength());		// TODO: Find less janky solution
+		if(this.text.isVisible()){
+			this.text.append(sample.toString() + "\n");
+			this.text.setCaretPosition(text.getDocument().getLength());		// TODO: Find less janky solution
+		}
 	}
 }

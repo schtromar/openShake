@@ -20,7 +20,7 @@ public class Sample{
 		this.date = date;
 	}
 
-	protected Sample(int value, Date date){
+	public Sample(int value, Date date){
 		Logger.debug("createing Sample(int, Date)");
 		this.value = value;
 		this.date = date;
@@ -28,5 +28,13 @@ public class Sample{
 
 	public String toString(){
 		return String.format("%s : %d", this.date.toString(), this.value);
+	}
+
+	public Date getDate(){
+		return this.date;
+	}
+
+	public int getValue(){
+		return this.value;
 	}
 }
