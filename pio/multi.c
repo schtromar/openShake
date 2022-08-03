@@ -12,8 +12,10 @@
 
 #define LED_PIN 25
 
-#define SH_PIN 15
-#define PULSE_PIN 16
+#define SH_PIN 9
+//15
+#define PULSE_PIN 13
+//16
 
 
 static uint count = 5555;
