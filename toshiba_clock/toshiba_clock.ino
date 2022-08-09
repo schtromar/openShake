@@ -9,6 +9,7 @@ extern "C" {
 }
 
 void setup() {
+  noInterrupts();
   start();
 }
 
