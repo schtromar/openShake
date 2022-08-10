@@ -5,6 +5,7 @@ import java.util.Date;
 public class Sample{
 	private int value;
 	private Date date;
+	private long index;
 
 	protected Sample(byte[] value, Date date){
 		this(new String(value), date);
@@ -26,6 +27,18 @@ public class Sample{
 		this.date = date;
 	}
 
+	public Sample(Sample sample){
+		this.value = sample.getValue();
+		this.date = sample.getDate();
+		this.index = sample.getIndex();
+	}
+
+	public Sample(Sample sample, int newValue){
+		this.value = newValue;
+		this.date = sample.getDate();
+		this.index = sample.getIndex();
+	}
+
 	public String toString(){
 		return String.format("%s : %d", this.date.toString(), this.value);
 	}
@@ -37,4 +50,14 @@ public class Sample{
 	public int getValue(){
 		return this.value;
 	}
+
+
+	public void setIndex(long i){
+		this.index = i;
+	}
+
+	public long getIndex(){
+		return this.index;
+	}
+
 }

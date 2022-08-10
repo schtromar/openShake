@@ -8,11 +8,14 @@ public class Data{
 //	private List<Sample> samples;
 	private CircularList<Sample> samples;
 	private List<Updater> updaters;
+	private long sampleCount;
+
 
 	Data(){
 //		this.samples = new ArrayList<Sample>();
 		this.samples = new CircularList<Sample>(4096);
 		this.updaters = new ArrayList<Updater>();
+		this.sampleCount = 0;
 	}
 
 	public void addUpdater(Updater u){
@@ -21,6 +24,7 @@ public class Data{
 
 	protected void addSample(Sample sample){
 		try{
+			sample.setIndex(this.sampleCount++);
 			this.samples.add(sample);
 		}catch(Exception e){
 			Logger.error("Error adding sample to List", e);
