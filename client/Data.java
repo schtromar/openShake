@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Iterator;
 
 public class Data{
-	private List<Sample> samples;
+//	private List<Sample> samples;
+	private CircularList<Sample> samples;
 	private List<Updater> updaters;
 
 	Data(){
-		this.samples = new ArrayList<Sample>();
+//		this.samples = new ArrayList<Sample>();
+		this.samples = new CircularList<Sample>(4096);
 		this.updaters = new ArrayList<Updater>();
 	}
 

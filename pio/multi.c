@@ -19,6 +19,7 @@
 
 
 static uint count = 5555;
+uint64_t lastPulse;
 
 
 
@@ -36,15 +37,18 @@ void commThread(){
 void risingEdgeInterrupt(){
 	if(pio0_hw->irq & 1){
 		pio0_hw->irq = 1;
-		count = 0;
+		lastPulse = time_us_64();
+
+///		count = 0;
 //		gpio_put(LED_PIN, GPIO_ON);
 	}else if(pio0_hw->irq & 2){
 		pio0_hw->irq = 2;
 //		gpio_put(LED_PIN, GPIO_OFF);
 //		uint data = count;
 //		multicore_fifo_push_blocking(data);
-		multicore_fifo_push_blocking(count);
-		count = 0;
+		multicore_fifo_push_blocking(time_us_64()-lastPulse);
+///		multicore_fifo_push_blocking(count);
+///		count = 0;
 
 	}
 }
@@ -102,17 +106,20 @@ int main(){
 	printf("DONE\n");
 
 	uint32_t interruptStatus;
-
 	printf("READY!\n");
 	while(true){
+
+/*
 		interruptStatus = save_and_disable_interrupts();
 		count++;
+//		sleep_us(1);
+		busy_wait_us(1);
 		restore_interrupts(interruptStatus);
 
-		sleep_us(1);
 //		__asm volatile ("nop":);
 //		asmSleep();
 
+*/
 	}
 
 

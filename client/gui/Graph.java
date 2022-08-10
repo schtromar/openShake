@@ -42,7 +42,7 @@ class Graph extends Chart implements Updater{
 		axis.setAutoRange(true);
 		axis.setFixedAutoRange(60000.0);
 		axis = plot.getRangeAxis();
-		axis.setRange(0.0, 1000.0);
+		axis.setRange(0.0, 700.0);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
 		this.add(chartPanel);
