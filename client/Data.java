@@ -22,6 +22,10 @@ public class Data{
 		this.updaters.add(u);
 	}
 
+	public void removeUpdater(Updater u){
+		this.updaters.remove(u);
+	}
+
 	protected void addSample(Sample sample){
 		try{
 			sample.setIndex(this.sampleCount++);

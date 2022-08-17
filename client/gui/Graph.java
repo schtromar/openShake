@@ -57,7 +57,8 @@ class Graph extends Chart implements Updater{
 //		axis = plot.getRangeAxis();
 //		axis.setRange(0.0, 700.0);
 		NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
-		valueAxis.setAutoRangeIncludesZero(false);
+//		valueAxis.setAutoRangeIncludesZero(false);
+		valueAxis.setRange(0,500);
 
 		XYPlot plot = new XYPlot(new XYSeriesCollection(series), timeAxis, valueAxis, new XYLineAndShapeRenderer(true, false));
 		JFreeChart chart = new JFreeChart(s, JFreeChart.DEFAULT_TITLE_FONT, plot, false);

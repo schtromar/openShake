@@ -8,8 +8,13 @@ import com.fazecast.jSerialComm.SerialPort;
 import openShake.client.Main;
 import openShake.client.Comm;
 import openShake.client.Listener;
+import openShake.client.FileFormat;
+import openShake.client.OutputCSV;
+import openShake.client.LogFileWriter;
 
 public class Window{
+
+	private LogFileWriter logFileWriter;
 
 	final int windowHeight = 800;
 	final int windowWidth = 1200;
@@ -18,6 +23,11 @@ public class Window{
 	final String configTabText = "Configuration";
 	final String connectButtonText = "Connect";
 	final String refreshButtonText = "Refresh";
+	final String communicationText = "Communication";
+	final String outputFileText = "Output file";
+	final String fileSelectButtonText = "Select";
+	final String startFileLoggingButtonText = "Start";
+	final String stopFileLoggingButtonText = "Stop";
 
 	final String logTabText = "Samples";
 
@@ -49,11 +59,16 @@ public class Window{
 		r.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
-		// Serial port selector dropdown
-		JComboBox<SerialPort> serialPortSelector = new JComboBox<SerialPort>(Comm.getCommPorts());
+		// Communication label
+		JLabel communicationLabel = new JLabel(communicationText);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
+		r.add(communicationLabel, c);
+
+		// Serial port selector dropdown
+		JComboBox<SerialPort> serialPortSelector = new JComboBox<SerialPort>(Comm.getCommPorts());
+		c.gridy++;
 		r.add(serialPortSelector, c);
 
 		// Connect button
@@ -82,9 +97,66 @@ public class Window{
 			}
 		);
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy++;
 		c.gridwidth = 2;
 		r.add(refreshButton, c);
+
+		// Output file label
+		JLabel outputFileLabel = new JLabel(outputFileText);
+		c.gridwidth = 1;
+		c.gridy++;
+		r.add(outputFileLabel, c);
+
+		// File selector
+/*
+		JFileChooser fc = new JFileChooser();
+		c.gridx = 0;
+		c.gridy++;
+		r.add(fc, c);
+*/
+		JTextField filenameTextField = new JTextField();
+		c.gridy++;
+		r.add(filenameTextField, c);
+
+		// File type selector
+		JComboBox<FileFormat> fileFormats= new JComboBox<FileFormat>();
+		fileFormats.addItem(new OutputCSV());
+		fileFormats.addItem(new OutputCSV());
+		c.gridx = 1;
+		r.add(fileFormats, c);
+
+		// Select button
+		JButton fileSelectButton = new JButton(fileSelectButtonText);
+		fileSelectButton.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				}
+			}
+		);
+		c.gridx = 0;
+		c.gridy++;
+		r.add(fileSelectButton, c);
+
+		// Start/stop button
+		JButton startStopFileLoggingButton = new JButton(startFileLoggingButtonText);
+		startStopFileLoggingButton.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					if(logFileWriter == null){
+						logFileWriter = new LogFileWriter((FileFormat)fileFormats.getSelectedItem(), filenameTextField.getText());
+						Main.data.addUpdater(logFileWriter);
+						startStopFileLoggingButton.setText(stopFileLoggingButtonText);
+					}else{
+						Main.data.removeUpdater(logFileWriter);
+						logFileWriter = null;
+						startStopFileLoggingButton.setText(startFileLoggingButtonText);
+					}
+				}
+			}
+		);
+		c.gridx = 1;
+		r.add(startStopFileLoggingButton, c);
+
 
 		return r;
 	}
