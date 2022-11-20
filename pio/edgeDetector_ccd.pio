@@ -1,4 +1,4 @@
-.program risingEdge
+.program risingEdge_ccd
 ; Wait for rising edge on pin and send interrupt when it happens
 
 .wrap_target
@@ -9,8 +9,8 @@
 
 
 % c-sdk {
-	static inline void risingEdgeInit(PIO pio, uint sm, uint offset, uint clock_pin){
-		pio_sm_config c = risingEdge_program_get_default_config(offset);
+	static inline void risingEdgeInit_ccd(PIO pio, uint sm, uint offset, uint clock_pin){
+		pio_sm_config c = risingEdge_ccd_program_get_default_config(offset);
 		sm_config_set_in_pins(&c, clock_pin);					//Set base IN pin
 		pio_sm_set_consecutive_pindirs(pio, sm, clock_pin, 1, false);		//Set direction of 1 pin to IN
 		pio_gpio_init(pio, clock_pin);						//Connect GPIO to PIO block

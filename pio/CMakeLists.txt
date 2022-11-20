@@ -18,7 +18,10 @@ add_executable(multi
 	asmFunctions.S
         )
 
-pico_generate_pio_header(multi ${CMAKE_CURRENT_LIST_DIR}/edgeDetector.pio)
+pico_generate_pio_header(multi ${CMAKE_CURRENT_LIST_DIR}/edgeDetector_ccd.pio)
+pico_generate_pio_header(multi ${CMAKE_CURRENT_LIST_DIR}/edgeDetector_sh.pio)
+
+#pico_generate_pio_header(multi ${CMAKE_CURRENT_LIST_DIR}/edgeDetector_ccd.pio ${CMAKE_CURRENT_LIST_DIR}/edgeDetector_sh.pio)
 
 # Pull in our pico_stdlib which pulls in commonly used features
 target_link_libraries(multi

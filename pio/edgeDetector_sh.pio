@@ -1,16 +1,16 @@
-.program risingEdge
+.program risingEdge_sh
 ; Wait for rising edge on pin and send interrupt when it happens
 
 .wrap_target
-	wait 0 pin 0	; Wait for rising edge on pin 0
-	wait 1 pin 0
-	irq wait 0	; Send IRQ 0 and block
+	wait 0 pin 2	; Wait for rising edge on pin 0
+	wait 1 pin 2
+	irq wait 1	; Send IRQ 0 and block
 .wrap
 
 
 % c-sdk {
-	static inline void risingEdgeInit(PIO pio, uint sm, uint offset, uint clock_pin){
-		pio_sm_config c = risingEdge_program_get_default_config(offset);
+	static inline void risingEdgeInit_sh(PIO pio, uint sm, uint offset, uint clock_pin){
+		pio_sm_config c = risingEdge_sh_program_get_default_config(offset);
 		sm_config_set_in_pins(&c, clock_pin);					//Set base IN pin
 		pio_sm_set_consecutive_pindirs(pio, sm, clock_pin, 1, false);		//Set direction of 1 pin to IN
 		pio_gpio_init(pio, clock_pin);						//Connect GPIO to PIO block
