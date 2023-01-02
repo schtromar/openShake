@@ -11,6 +11,10 @@ import openShake.client.Listener;
 import openShake.client.FileFormat;
 import openShake.client.OutputCSV;
 import openShake.client.LogFileWriter;
+import openShake.client.Filter;
+import openShake.client.FilterNone;
+import openShake.client.FilterOffset;
+import openShake.client.FilterAdaptive;
 
 public class Window{
 
@@ -28,6 +32,11 @@ public class Window{
 	final String fileSelectButtonText = "Select";
 	final String startFileLoggingButtonText = "Start";
 	final String stopFileLoggingButtonText = "Stop";
+	final String averagingModeText = "Averaging mode";
+	final String averagingModeNoneText = "none";
+	final String averagingModeSingleText = "one-shot";
+	final String averagingModeRollingText = "RollingAverage";
+
 
 	final String logTabText = "Samples";
 
@@ -157,6 +166,31 @@ public class Window{
 		c.gridx = 1;
 		r.add(startStopFileLoggingButton, c);
 
+
+		// Averaging mode label
+		JLabel averagingModeLabel = new JLabel(averagingModeText);
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy++;
+		r.add(averagingModeLabel, c);
+
+		// Averaging mode selector
+		JComboBox<Filter> filters = new JComboBox<Filter>();
+		filters.addItem(new FilterNone());
+		filters.addItem(new FilterOffset());
+		filters.addItem(new FilterAdaptive());
+
+		filters.addItemListener(
+			new ItemListener(){
+				public void itemStateChanged(ItemEvent e){
+//					Main.data.setAveragingFilter(filters.getSelectedItem());
+					Main.data.setAveragingFilter(filters.getItemAt(filters.getSelectedIndex()));	//dej neno
+				}
+			}
+		);
+
+		c.gridx = 1;
+		r.add(filters, c);
 
 		return r;
 	}

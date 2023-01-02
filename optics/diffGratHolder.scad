@@ -15,15 +15,20 @@ module diffGratHolder(hx, hy, hz, gx, gy, gz, sides, groove){
 //diffGratHolder(100, 15, 18, 91, 1.4, 6, 6.5, 2.5);
 
 module cornerHolder(){
+difference(){
 	intersection(){
 		translate([48,0,0]){
 			cube(20, center=true);
 		}
 		diffGratHolder(100, 15, 18, 91, 1.4, 6, 6.5, 2.5);
 	}
+	translate([40,0,0]){
+		#cube([8, 8.5, 18], center=true);
+	}
+}
 }
 
-//cornerHolder();
+cornerHolder();
 
 module HHolder(x, y, z, bottom, top, d){
 	difference(){
@@ -39,4 +44,4 @@ module HHolder(x, y, z, bottom, top, d){
 	
 }
 
-HHolder(25, 4, 90, 16, 15, 16);
+//HHolder(25, 4, 90, 16, 15, 16);

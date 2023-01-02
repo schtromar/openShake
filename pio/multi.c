@@ -12,9 +12,9 @@
 
 #define LED_PIN 25
 
-#define SH_PIN 9
-//15
-#define PULSE_PIN 13
+#define SH_PIN 2
+//1
+#define PULSE_PIN 1
 //16
 
 

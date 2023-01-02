@@ -5,8 +5,8 @@
 	wait 0 pin 0	; Wait for rising edge on pin 0
 	wait 1 pin 0
 	irq wait 0	; Send IRQ 0 and block
-	wait 1 pin 4	; Wait for falling edge on pin 1
-	wait 0 pin 4
+	wait 1 pin 1	; Wait for falling edge on pin 1
+	wait 0 pin 1
 	irq wait 1	; Send IRQ 1 and block
 .wrap
 
@@ -14,7 +14,7 @@
 % c-sdk {
 	static inline void risingEdgeInit(PIO pio, uint sm, uint offset, uint sh_pin, uint pulse_pin){
 		pio_sm_config c = risingEdge_program_get_default_config(offset);
-		sm_config_set_in_pins(&c, sh_pin);					//Set base IN pin
+		sm_config_set_in_pins(&c, pulse_pin);					//Set base IN pin
 		pio_sm_set_consecutive_pindirs(pio, sm, sh_pin, 1, false);		//Set direction of 1 pin to IN
 		pio_sm_set_consecutive_pindirs(pio, sm, pulse_pin, 1, false);		//Set direction of 1 pin to IN
 		pio_gpio_init(pio, pulse_pin);					//Connect GPIO to PIO block
