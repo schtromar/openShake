@@ -11,6 +11,7 @@ public class LogFileWriter implements Updater{
 		this.converter = converter;
 		try{
 			this.bw = new BufferedWriter(new FileWriter(new File(filename)));
+			this.bw.write(this.converter.header());
 		}catch(IOException e){
 			Logger.error("IO Exception! Cannot open file.");
 		}
