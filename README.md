@@ -1,6 +1,5 @@
 # openShake
-![Alt text](./Logo_OpenShake.svg)
-<img src="./Logo_OpenShake.svg">
+![OpenShake Logo](./Logo_OpenShake.svg)
 
 An attempt to measure vibrations optically by refleting a laser beam from a moving mirror and measuring the movements using a linear CCD sensor.
 
