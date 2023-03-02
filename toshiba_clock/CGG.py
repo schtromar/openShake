@@ -2,9 +2,9 @@
 
 # Configuration
 outfile = "toshiba_clock.S"
-pulses = 1104
+pulses = 1091
 nops_between = 0
-nops_after = 100
+nops_after = 50
 
 # Open file and write header and setup code. Correct pins if needed.
 f = open(outfile, "w")
@@ -20,16 +20,16 @@ f.write("""
 .global start
 .global forever
 
-#define S1 sbi PORTD, 5
-#define C1 cbi PORTD, 5
-#define S2 sbi PORTD, 7
-#define C2 cbi PORTD, 7
-#define S3 sbi PORTD, 3
-#define C3 cbi PORTD, 3
+#define S1 sbi PORTB, 3
+#define C1 cbi PORTB, 3
+#define S2 sbi PORTB, 2
+#define C2 cbi PORTB, 2
+#define S3 sbi PORTB, 4
+#define C3 cbi PORTB, 4
 
-start:  SBI DDRD, 5
-        SBI DDRD, 7
-        SBI DDRD, 3
+start:  SBI DDRB, 3
+        SBI DDRB, 2
+        SBI DDRB, 4
 forever:
 
 """)
@@ -41,7 +41,7 @@ fm = True
 fc = True
 
 
-for i in range(pulses):
+for i in range(pulses*4):
 
 	sh = i<4
 	fm = not i%2

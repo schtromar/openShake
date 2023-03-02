@@ -67,7 +67,9 @@ void PIOInterrupt(){
 		pio0_hw->irq = 2;
 
 
-		multicore_fifo_push_blocking(firstPulse);
+//		multicore_fifo_push_blocking(firstPulse+((lastPulse-firstPulse)>>1));
+		multicore_fifo_push_blocking(lastPulse);
+
 		counter = 0;
 		firstPulse = 0;
 		lastPulse = 0;
