@@ -10,12 +10,23 @@ public class Data{
 	private List<Updater> updaters;
 	private long sampleCount;
 
+	private OffsetFilter averagingFilter;
 
 	Data(){
 //		this.samples = new ArrayList<Sample>();
 		this.samples = new CircularList<Sample>(4096);
 		this.updaters = new ArrayList<Updater>();
 		this.sampleCount = 0;
+
+		this.averagingFilter = new FilterNone();
+	}
+
+	private Sample filter(Sample sample){
+		return this.averagingFilter.filter(sample);
+	}
+
+	public void setAveragingFilter(OffsetFilter filter){
+		this.averagingFilter = filter;
 	}
 
 	public void addUpdater(Updater u){
@@ -27,6 +38,9 @@ public class Data{
 	}
 
 	protected void addSample(Sample sample){
+
+		sample = this.filter(sample);
+
 		try{
 			sample.setIndex(this.sampleCount++);
 			this.samples.add(sample);

@@ -11,6 +11,11 @@ import openShake.client.Listener;
 import openShake.client.FileFormat;
 import openShake.client.OutputCSV;
 import openShake.client.LogFileWriter;
+import openShake.client.Filter;
+import openShake.client.OffsetFilter;
+import openShake.client.FilterNone;
+import openShake.client.FilterOffset;
+import openShake.client.FilterAdaptive;
 
 public class Window{
 
@@ -28,6 +33,11 @@ public class Window{
 	final String fileSelectButtonText = "Select";
 	final String startFileLoggingButtonText = "Start";
 	final String stopFileLoggingButtonText = "Stop";
+	final String averagingModeText = "Averaging mode";
+	final String averagingModeNoneText = "none";
+	final String averagingModeSingleText = "one-shot";
+	final String averagingModeRollingText = "RollingAverage";
+
 
 	final String logTabText = "Samples";
 
@@ -158,6 +168,31 @@ public class Window{
 		r.add(startStopFileLoggingButton, c);
 
 
+		// Averaging mode label
+		JLabel averagingModeLabel = new JLabel(averagingModeText);
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy++;
+		r.add(averagingModeLabel, c);
+
+		// Averaging mode selector
+		JComboBox<OffsetFilter> filters = new JComboBox<OffsetFilter>();
+		filters.addItem(new FilterNone());
+		filters.addItem(new FilterOffset());
+		filters.addItem(new FilterAdaptive());
+
+		filters.addItemListener(
+			new ItemListener(){
+				public void itemStateChanged(ItemEvent e){
+//					Main.data.setAveragingFilter(filters.getSelectedItem());
+					Main.data.setAveragingFilter(filters.getItemAt(filters.getSelectedIndex()));	//dej neno
+				}
+			}
+		);
+
+		c.gridx = 1;
+		r.add(filters, c);
+
 		return r;
 	}
 
@@ -179,13 +214,13 @@ public class Window{
 		r.setLayout(new BorderLayout());
 
 
-		Chart[] windows = new Chart[4];
+		Chart[] windows = new Chart[2];
 		windows[0] = new Graph(rawGraphLabelText);
 		Main.data.addUpdater((Graph)windows[0]);
 		windows[1] = new GraphDerivative(derivativeGraphLabelText);
 		Main.data.addUpdater((Graph)windows[1]);
-		windows[2] = new Chart(FFTPanadapterLabelText);
-		windows[3] = new Chart(FFTWaterfallLabelText);
+//		windows[2] = new Chart(FFTPanadapterLabelText);
+//		windows[3] = new Chart(FFTWaterfallLabelText);
 		JPanel windowListPane = new JPanel();
 		JScrollPane scrollPane = new JScrollPane(windowListPane);
 		windowListPane.setLayout(new BoxLayout(windowListPane, BoxLayout.PAGE_AXIS));
