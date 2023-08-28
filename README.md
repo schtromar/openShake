@@ -31,4 +31,4 @@ The client can save its recordings in a timestamped CSV file, which can be conve
 
 ## Examples
 Some example recordings can be found [here](tests).
-A demo can be seen [onYouTube](https://youtu.be/EQ8wb5Zc1EE)
+A demo can be seen [on YouTube](https://youtu.be/EQ8wb5Zc1EE)
